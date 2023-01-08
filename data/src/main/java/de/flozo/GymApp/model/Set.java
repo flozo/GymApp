@@ -1,8 +1,6 @@
 package de.flozo.GymApp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -18,5 +16,9 @@ public class Set extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "weight_id")
     private Weight weight;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exercise_unit_id")
+    private ExerciseUnit exerciseUnit;
 
 }
