@@ -6,6 +6,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,5 +22,14 @@ public class Muscle extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_muscle_group_id")
     private MajorMuscleGroup majorMuscleGroup;
+
+
+    @ManyToOne
+    @JoinColumn(name = "execise_id")
+    private Set<Exercise> exercisesPrimaryMuscle;
+
+    @ManyToOne
+    @JoinColumn(name = "execise_id")
+    private Set<Exercise> exercisesSecondaryMuscle;
 
 }
