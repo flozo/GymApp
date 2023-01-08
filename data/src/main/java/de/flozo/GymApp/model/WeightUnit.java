@@ -9,10 +9,9 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
-public class ExerciseUnit extends BaseEntity {
+public class WeightUnit extends BaseEntity {
 
-    private Exercise exercise;
-
-    private Integer numberOfSets;
+    private String name;
+    private String symbol;
 
 }
