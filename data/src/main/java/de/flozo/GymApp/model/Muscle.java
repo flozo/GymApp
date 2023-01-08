@@ -13,6 +13,5 @@ public class Muscle extends BaseEntity {
 
     private String scientificName;
     private String shortName;
-    private String part;
 
 }
