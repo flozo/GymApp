@@ -29,7 +29,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     public Exercise findById(Long id) {
         Optional<Exercise> exerciseOptional = exerciseRepository.findById(id);
         if (exerciseOptional.isEmpty()) {
-            throw new NotFoundException("Body part not found! Id value " + id + " not present!");
+            throw new NotFoundException("Exercise not found! Id value " + id + " not present!");
         }
         return exerciseOptional.get();
     }
