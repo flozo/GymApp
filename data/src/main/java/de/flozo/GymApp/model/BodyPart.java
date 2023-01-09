@@ -13,11 +13,11 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Entity
-public class MajorMuscleGroup extends BaseEntity {
+public class BodyPart extends BaseEntity {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "MajorMuscleGroup")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "BodyPart")
     private Set<Muscle> muscles;
 
 }

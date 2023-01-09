@@ -21,7 +21,7 @@ public class Muscle extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_muscle_group_id")
-    private MajorMuscleGroup majorMuscleGroup;
+    private BodyPart bodyPart;
 
 
     @ManyToOne
