@@ -1,6 +1,7 @@
 package de.flozo.GymApp.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,6 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "workout_units")
 public class WorkoutUnit extends BaseEntity {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

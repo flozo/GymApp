@@ -1,11 +1,7 @@
 package de.flozo.GymApp.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -13,15 +9,22 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "exercises")
 public class Exercise extends BaseEntity {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Exercise")
-    private Set<Muscle> primaryMusclesWorked;
+    @ManyToMany
+    @JoinTable(name = "exercise_primary_muscles",
+    joinColumns = @JoinColumn(name = "exercise_id"),
+    inverseJoinColumns = @JoinColumn(name = "muscle_id"))
+    private java.util.Set<Muscle> primaryMusclesWorked;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Exercise")
-    private Set<Muscle> secondaryMusclesWorked;
+    @ManyToMany
+    @JoinTable(name = "exercise_secondary_muscles",
+            joinColumns = @JoinColumn(name = "exercise_id"),
+            inverseJoinColumns = @JoinColumn(name = "muscle_id"))
+    private java.util.Set<Muscle> secondaryMusclesWorked;
 
 
 }

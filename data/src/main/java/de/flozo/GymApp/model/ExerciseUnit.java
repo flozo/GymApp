@@ -1,8 +1,6 @@
 package de.flozo.GymApp.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -13,12 +11,15 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "exercise_units")
 public class ExerciseUnit extends BaseEntity {
 
     private Exercise exercise;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ExerciseUnit")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exerciseUnit")
     private List<Set> sets;
 
+    @ManyToMany(mappedBy = "exerciseUnits")
+    private java.util.Set<WorkoutProgram> workoutPrograms;
 
 }

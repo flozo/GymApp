@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "sets")
 public class Set extends BaseEntity {
 
     private Integer numberOfRepetitions;

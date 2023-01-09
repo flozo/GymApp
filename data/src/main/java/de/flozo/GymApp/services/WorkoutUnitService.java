@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface WorkoutUnitService extends CrudService<WorkoutUnit, Long> {
 
-    List<WorkoutUnit> findAllByOrderByDateDesc();
+    List<WorkoutUnit> findAllSortByDateDesc();
 
 }

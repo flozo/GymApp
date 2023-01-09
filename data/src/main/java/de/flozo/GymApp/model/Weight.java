@@ -3,6 +3,7 @@ package de.flozo.GymApp.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
@@ -11,9 +12,10 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "weights")
 public class Weight extends BaseEntity {
 
-    private Double value;
+    private Double numericalValue;
 
     @OneToOne
     @JoinColumn(name = "weight_unit_id")

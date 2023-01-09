@@ -32,6 +32,8 @@ public class DataLoader implements CommandLineRunner {
         triceps.setShortName("Triceps");
 
 
+        muscleService.save(biceps);
+        muscleService.save(triceps);
 
 
 

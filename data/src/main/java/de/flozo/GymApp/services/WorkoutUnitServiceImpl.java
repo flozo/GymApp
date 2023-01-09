@@ -52,7 +52,7 @@ public class WorkoutUnitServiceImpl implements WorkoutUnitService {
     }
 
     @Override
-    public List<WorkoutUnit> findAllByOrderByDateDesc() {
+    public List<WorkoutUnit> findAllSortByDateDesc() {
         return workoutUnitRepository.findAllByOrderByDateDesc();
     }
 }

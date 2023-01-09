@@ -1,12 +1,7 @@
 package de.flozo.GymApp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -14,22 +9,21 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name = "muscles")
 public class Muscle extends BaseEntity {
 
     private String scientificName;
     private String shortName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "major_muscle_group_id")
+    @JoinColumn(name = "body_part_id")
     private BodyPart bodyPart;
 
 
-    @ManyToOne
-    @JoinColumn(name = "execise_id")
-    private Set<Exercise> exercisesPrimaryMuscle;
+    @ManyToMany(mappedBy = "primaryMusclesWorked")
+    private java.util.Set<Exercise> exercisesPrimaryMuscle;
 
-    @ManyToOne
-    @JoinColumn(name = "execise_id")
-    private Set<Exercise> exercisesSecondaryMuscle;
+    @ManyToMany(mappedBy = "secondaryMusclesWorked")
+    private java.util.Set<Exercise> exercisesSecondaryMuscle;
 
 }
