@@ -1,5 +1,6 @@
 package de.flozo.GymApp.services;
 
+import de.flozo.GymApp.exceptions.NotFoundException;
 import de.flozo.GymApp.model.BodyPart;
 import de.flozo.GymApp.repositories.BodyPartRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class BodyPartServiceImpl implements BodyPartService {
     public BodyPart findById(Long id) {
         Optional<BodyPart> bodyPartOptional = bodyPartRepository.findById(id);
         if (bodyPartOptional.isEmpty()) {
-//            throw new NotFoundException("Body part not found! Id value " + id + " not present!");
+            throw new NotFoundException("Body part not found! Id value " + id + " not present!");
         }
         return bodyPartOptional.get();
     }
