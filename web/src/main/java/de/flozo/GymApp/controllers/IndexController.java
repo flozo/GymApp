@@ -16,7 +16,7 @@ public class IndexController {
 
     @RequestMapping({"", "/", "index", "index.html"})
     public String getIndexPage(Model model) {
-        model.addAttribute("workout_units", workoutUnitService.findAll());
+        model.addAttribute("workout_units", workoutUnitService.findAllByOrderByDateDesc());
         return "index";
     }
 

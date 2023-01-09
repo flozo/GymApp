@@ -6,6 +6,7 @@ import de.flozo.GymApp.repositories.WorkoutUnitRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -48,5 +49,10 @@ public class WorkoutUnitServiceImpl implements WorkoutUnitService {
     @Override
     public void deleteById(Long id) {
         workoutUnitRepository.deleteById(id);
+    }
+
+    @Override
+    public List<WorkoutUnit> findAllByOrderByDateDesc() {
+        return workoutUnitRepository.findAllByOrderByDateDesc();
     }
 }
