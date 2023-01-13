@@ -3,6 +3,7 @@ package de.flozo.GymApp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,7 +21,7 @@ public class WorkoutProgram extends BaseEntity {
     @JoinTable(name = "workout_program_exercise_unit",
             joinColumns = @JoinColumn(name = "workout_program_id"),
             inverseJoinColumns = @JoinColumn(name = "exercise_unit_id"))
-    private List<ExerciseUnit> exerciseUnits;
+    private List<ExerciseUnit> exerciseUnits = new ArrayList<>();
     private String remarks;
 
 }

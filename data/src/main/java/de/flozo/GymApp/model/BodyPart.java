@@ -6,6 +6,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -20,13 +21,14 @@ public class BodyPart extends BaseEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bodyPart")
-    private Set<Muscle> muscles;
+    private Set<Muscle> muscles = new HashSet<>();
 
     public BodyPart addMuscle(Muscle muscle) {
         muscles.add(muscle);
         muscle.setBodyPart(this);
         return this;
     }
+
 
     public BodyPart removeMuscle(Muscle muscle) {
         muscles.remove(muscle);
