@@ -1,24 +1,25 @@
 package de.flozo.GymApp.bootstrap;
 
 import de.flozo.GymApp.model.BodyPart;
+import de.flozo.GymApp.model.Exercise;
 import de.flozo.GymApp.model.Muscle;
 import de.flozo.GymApp.services.BodyPartService;
+import de.flozo.GymApp.services.ExerciseService;
 import de.flozo.GymApp.services.MuscleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public class DataLoader implements CommandLineRunner {
 
     private final BodyPartService bodyPartService;
     private final MuscleService muscleService;
+    private final ExerciseService exerciseService;
 
-    public DataLoader(BodyPartService bodyPartService, MuscleService muscleService) {
+    public DataLoader(BodyPartService bodyPartService, MuscleService muscleService, ExerciseService exerciseService) {
         this.bodyPartService = bodyPartService;
         this.muscleService = muscleService;
+        this.exerciseService = exerciseService;
     }
 
 
@@ -30,6 +31,8 @@ public class DataLoader implements CommandLineRunner {
     private void loadData() {
 
 
+        // Define body parts
+        System.out.println("Define body parts ...");
         BodyPart chest = new BodyPart();
         chest.setName("Chest");
         BodyPart back = new BodyPart();
@@ -42,13 +45,25 @@ public class DataLoader implements CommandLineRunner {
         shoulders.setName("Shoulders");
         BodyPart abdominals = new BodyPart();
         abdominals.setName("Abdominals");
+        System.out.println("... done!");
 
 
-
+        // Define muscles
+        System.out.println("Define muscles ...");
         Muscle biceps = new Muscle();
         biceps.setScientificName("Biceps brachii");
         biceps.setShortName("Biceps");
         biceps.setBodyPart(arms);
+
+        Muscle brachialis = new Muscle();
+        brachialis.setScientificName("Brachialis");
+        brachialis.setShortName("Brachialis");
+        brachialis.setBodyPart(arms);
+
+        Muscle brachioradialis = new Muscle();
+        brachioradialis.setScientificName("Brachioradialis");
+        brachioradialis.setShortName("Brachioradialis");
+        brachioradialis.setBodyPart(arms);
 
         Muscle triceps = new Muscle();
         triceps.setScientificName("Triceps brachii");
@@ -64,32 +79,49 @@ public class DataLoader implements CommandLineRunner {
         hamstring1.setScientificName("Biceps femoris");
         hamstring1.setShortName("Biceps femoris");
         hamstring1.setBodyPart(legs);
+        System.out.println("... done!");
 
 
-        Set<Muscle> armMuscles = new HashSet<>();
-        armMuscles.add(biceps);
-        armMuscles.add(triceps);
-
-        arms.setMuscles(armMuscles);
-
-        Set<Muscle> legMuscles = new HashSet<>();
-        legMuscles.add(quads);
-        legMuscles.add(hamstring1);
-
-        legs.setMuscles(legMuscles);
+        System.out.println("Add muscles to body parts ...");
+        arms.addMuscle(biceps)
+                .addMuscle(brachialis)
+                .addMuscle(brachioradialis)
+                .addMuscle(triceps);
+        legs.addMuscle(quads)
+                .addMuscle(hamstring1);
+        System.out.println("... done!");
 
 
+        System.out.println("Define exercises ...");
+        Exercise bicepsCurls = new Exercise();
+        bicepsCurls.setName("Biceps curls");
+        bicepsCurls.addPrimaryMuscleWorked(biceps);
+        bicepsCurls.addSecondaryMuscleWorked(brachialis)
+                .addSecondaryMuscleWorked(brachioradialis);
+        System.out.println("... done!");
+
+
+        System.out.println("Save body parts ...");
         bodyPartService.save(chest);
         bodyPartService.save(back);
         bodyPartService.save(arms);
         bodyPartService.save(legs);
         bodyPartService.save(shoulders);
         bodyPartService.save(abdominals);
+        System.out.println("... done!");
 
 
+        System.out.println("Save muscles ...");
         muscleService.save(biceps);
         muscleService.save(triceps);
         muscleService.save(quads);
+        System.out.println("... done!");
+
+
+        System.out.println("Save exercises ...");
+        exerciseService.save(bicepsCurls);
+        System.out.println("... done!");
+
 
 
 
