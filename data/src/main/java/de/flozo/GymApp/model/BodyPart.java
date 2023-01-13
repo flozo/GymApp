@@ -22,4 +22,14 @@ public class BodyPart extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bodyPart")
     private Set<Muscle> muscles;
 
+    public void addMuscle(Muscle muscle) {
+        muscles.add(muscle);
+        muscle.setBodyPart(this);
+    }
+
+    public void removeMuscle(Muscle muscle) {
+        muscles.remove(muscle);
+        muscle.setBodyPart(null);
+    }
+
 }
