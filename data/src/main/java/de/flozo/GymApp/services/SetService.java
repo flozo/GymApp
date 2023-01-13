@@ -1,7 +1,7 @@
 package de.flozo.GymApp.services;
 
-import de.flozo.GymApp.model.Set;
+import de.flozo.GymApp.model.SetOfRepetitions;
 
-public interface SetService extends CrudService<Set, Long> {
+public interface SetService extends CrudService<SetOfRepetitions, Long> {
 
 }

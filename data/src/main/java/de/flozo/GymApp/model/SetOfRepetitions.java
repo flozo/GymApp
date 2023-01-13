@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 @Entity
 @Table(name = "sets")
-public class Set extends BaseEntity {
+public class SetOfRepetitions extends BaseEntity {
 
     private Integer numberOfRepetitions;
 

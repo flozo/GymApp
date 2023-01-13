@@ -3,6 +3,8 @@ package de.flozo.GymApp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,13 +20,13 @@ public class Exercise extends BaseEntity {
     @JoinTable(name = "exercise_primary_muscles",
     joinColumns = @JoinColumn(name = "exercise_id"),
     inverseJoinColumns = @JoinColumn(name = "muscle_id"))
-    private java.util.Set<Muscle> primaryMusclesWorked;
+    private Set<Muscle> primaryMusclesWorked;
 
     @ManyToMany
     @JoinTable(name = "exercise_secondary_muscles",
             joinColumns = @JoinColumn(name = "exercise_id"),
             inverseJoinColumns = @JoinColumn(name = "muscle_id"))
-    private java.util.Set<Muscle> secondaryMusclesWorked;
+    private Set<Muscle> secondaryMusclesWorked;
 
 
 }

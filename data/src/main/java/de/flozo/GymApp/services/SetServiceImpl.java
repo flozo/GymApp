@@ -1,7 +1,7 @@
 package de.flozo.GymApp.services;
 
 import de.flozo.GymApp.exceptions.NotFoundException;
-import de.flozo.GymApp.model.Set;
+import de.flozo.GymApp.model.SetOfRepetitions;
 import de.flozo.GymApp.repositories.SetRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +18,15 @@ public class SetServiceImpl implements SetService {
     }
 
     @Override
-    public java.util.Set<Set> findAll() {
-        java.util.Set<Set> sets = new HashSet<>();
-        setRepository.findAll().iterator().forEachRemaining(sets::add);
-        return sets;
+    public java.util.Set<SetOfRepetitions> findAll() {
+        java.util.Set<SetOfRepetitions> setOfRepetitions = new HashSet<>();
+        setRepository.findAll().iterator().forEachRemaining(setOfRepetitions::add);
+        return setOfRepetitions;
     }
 
     @Override
-    public Set findById(Long id) {
-        Optional<Set> setOptional = setRepository.findById(id);
+    public SetOfRepetitions findById(Long id) {
+        Optional<SetOfRepetitions> setOptional = setRepository.findById(id);
         if (setOptional.isEmpty()) {
             throw new NotFoundException("Set not found! Id value " + id + " not present!");
         }
@@ -34,13 +34,13 @@ public class SetServiceImpl implements SetService {
     }
 
     @Override
-    public Set save(Set set) {
-        return setRepository.save(set);
+    public SetOfRepetitions save(SetOfRepetitions setOfRepetitions) {
+        return setRepository.save(setOfRepetitions);
     }
 
     @Override
-    public void delete(Set set) {
-        setRepository.delete(set);
+    public void delete(SetOfRepetitions setOfRepetitions) {
+        setRepository.delete(setOfRepetitions);
     }
 
     @Override

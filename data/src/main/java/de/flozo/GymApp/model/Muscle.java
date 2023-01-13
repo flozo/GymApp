@@ -3,6 +3,8 @@ package de.flozo.GymApp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,9 +23,9 @@ public class Muscle extends BaseEntity {
 
 
     @ManyToMany(mappedBy = "primaryMusclesWorked")
-    private java.util.Set<Exercise> exercisesPrimaryMuscle;
+    private Set<Exercise> exercisesPrimaryMuscle;
 
     @ManyToMany(mappedBy = "secondaryMusclesWorked")
-    private java.util.Set<Exercise> exercisesSecondaryMuscle;
+    private Set<Exercise> exercisesSecondaryMuscle;
 
 }
