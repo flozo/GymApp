@@ -17,6 +17,8 @@ import java.util.Set;
 @Table(name = "exercise_units")
 public class ExerciseUnit extends BaseEntity {
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exercise_unit_id")
     private Exercise exercise;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exerciseUnit")
@@ -25,4 +27,11 @@ public class ExerciseUnit extends BaseEntity {
     @ManyToMany(mappedBy = "exerciseUnits")
     private Set<WorkoutProgram> workoutPrograms = new HashSet<>();
 
+    public ExerciseUnit addWorkoutProgram(WorkoutProgram workoutProgram) {
+        workoutPrograms.add(workoutProgram);
+        if (!workoutProgram.getExerciseUnits().contains(this)) {
+            workoutProgram.addExerciseUnit(this);
+        }
+        return this;
+    }
 }

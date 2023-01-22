@@ -29,6 +29,8 @@ public class Exercise extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "muscle_id"))
     private Set<Muscle> secondaryMusclesWorked = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exercise")
+    private Set<ExerciseUnit> exerciseUnits = new HashSet<>();
 
     public Exercise addPrimaryMuscleWorked(Muscle muscle) {
         primaryMusclesWorked.add(muscle);

@@ -1,11 +1,7 @@
 package de.flozo.GymApp.bootstrap;
 
-import de.flozo.GymApp.model.BodyPart;
-import de.flozo.GymApp.model.Exercise;
-import de.flozo.GymApp.model.Muscle;
-import de.flozo.GymApp.services.BodyPartService;
-import de.flozo.GymApp.services.ExerciseService;
-import de.flozo.GymApp.services.MuscleService;
+import de.flozo.GymApp.model.*;
+import de.flozo.GymApp.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +11,15 @@ public class DataLoader implements CommandLineRunner {
     private final BodyPartService bodyPartService;
     private final MuscleService muscleService;
     private final ExerciseService exerciseService;
+    private final ExerciseUnitService exerciseUnitService;
+    private final WorkoutProgramService workoutProgramService;
 
-    public DataLoader(BodyPartService bodyPartService, MuscleService muscleService, ExerciseService exerciseService) {
+    public DataLoader(BodyPartService bodyPartService, MuscleService muscleService, ExerciseService exerciseService, ExerciseUnitService exerciseUnitService, WorkoutProgramService workoutProgramService) {
         this.bodyPartService = bodyPartService;
         this.muscleService = muscleService;
         this.exerciseService = exerciseService;
+        this.exerciseUnitService = exerciseUnitService;
+        this.workoutProgramService = workoutProgramService;
     }
 
 
@@ -123,7 +123,27 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("... done!");
 
 
+        System.out.println("Define exercise units ...");
+        ExerciseUnit exerciseUnit = new ExerciseUnit();
+        exerciseUnit.setExercise(bicepsCurls);
+        System.out.println("... done!");
 
+
+        System.out.println("Define workout programs ...");
+        WorkoutProgram workoutProgram = new WorkoutProgram();
+        workoutProgram.setName("My program");
+        System.out.println("... done!");
+
+        workoutProgram.addExerciseUnit(exerciseUnit);
+        exerciseUnit.addWorkoutProgram(workoutProgram);
+
+        System.out.println("Save exercise units ...");
+        exerciseUnitService.save(exerciseUnit);
+        System.out.println("... done!");
+
+        System.out.println("Save workout programs ...");
+        workoutProgramService.save(workoutProgram);
+        System.out.println("... done!");
 
 
     }

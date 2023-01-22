@@ -24,4 +24,12 @@ public class WorkoutProgram extends BaseEntity {
     private List<ExerciseUnit> exerciseUnits = new ArrayList<>();
     private String remarks;
 
+    public WorkoutProgram addExerciseUnit(ExerciseUnit exerciseUnit) {
+        exerciseUnits.add(exerciseUnit);
+        if (!exerciseUnit.getWorkoutPrograms().contains(this)) {
+            exerciseUnit.addWorkoutProgram(this);
+        }
+        return this;
+    }
+
 }

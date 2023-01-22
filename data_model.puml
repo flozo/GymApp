@@ -1,27 +1,59 @@
 @startuml
-'https://plantuml.com/class-diagram
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+entity BodyPart {
+    name String
+    muscles Set<Muscle>
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+entity Muscle {
+    scientificName String
+    shortName String
+    bodyPart BodyPart
+    exercisesPrimaryMuscle Set<Exercise>
+    exercisesSecondaryMuscle Set<Exercise>
 }
+
+entity Exercise {
+    name String
+    primaryMusclesWorked Set<Muscle>
+    secondaryMusclesWorked Set<Muscle>
+    exerciseUnits Set<ExerciseUnit>
+}
+
+entity ExerciseUnit {
+    exercise Exercise
+    setOfRepetitions List<SetOfRepetitions>
+    workoutProgram Set<WorkoutProgram>
+}
+
+entity SetOfRepetitions {
+    numberOfRepetitions Integer
+    weight Weight
+    exerciseUnit ExerciseUnit
+}
+
+entity Weight {
+    numericalValue Double
+    unit WeightUnit
+}
+
+entity WeightUnit {
+    name String
+    symbol String
+}
+
+entity WorkoutProgram {
+    name String
+    exerciseUnits List<ExerciseUnit>
+    remarks String
+}
+
+Weight --> WeightUnit
+SetOfRepetitions --> Weight
+BodyPart "1" <--> "*" Muscle
+ExerciseUnit "*" <--> "*" WorkoutProgram
+ExerciseUnit "1" <--> "*" SetOfRepetitions
+Muscle "*" <--> "*" Exercise
+Muscle "*" <--> "*" Exercise
+Exercise "1" <--> "*" ExerciseUnit
 
 @enduml
