@@ -33,90 +33,61 @@ public class DataLoader implements CommandLineRunner {
 
         // Define body parts
         System.out.println("Define body parts ...");
-        BodyPart chest = new BodyPart();
-        chest.setName("Chest");
-        BodyPart back = new BodyPart();
-        back.setName("Back");
-        BodyPart arms = new BodyPart();
-        arms.setName("Arms");
-        BodyPart legs = new BodyPart();
-        legs.setName("Legs");
-        BodyPart shoulders = new BodyPart();
-        shoulders.setName("Shoulders");
-        BodyPart abdominals = new BodyPart();
-        abdominals.setName("Abdominals");
+        BodyPart chest = BodyPart.builder()
+                .name("Chest")
+                .build();
+        BodyPart back = BodyPart.builder()
+                .name("Back")
+                .build();
+        BodyPart shoulders = BodyPart.builder()
+                .name("Shoulders")
+                .build();
+        BodyPart abdominals = BodyPart.builder()
+                .name("Abdominals")
+                .build();
         System.out.println("... done!");
 
 
-        // Define muscles
-        System.out.println("Define muscles ...");
-        Muscle biceps = new Muscle();
-        biceps.setScientificName("Biceps brachii");
-        biceps.setShortName("Biceps");
-        biceps.setBodyPart(arms);
 
-        Muscle brachialis = new Muscle();
-        brachialis.setScientificName("Brachialis");
-        brachialis.setShortName("Brachialis");
-        brachialis.setBodyPart(arms);
-
-        Muscle brachioradialis = new Muscle();
-        brachioradialis.setScientificName("Brachioradialis");
-        brachioradialis.setShortName("Brachioradialis");
-        brachioradialis.setBodyPart(arms);
-
-        Muscle triceps = new Muscle();
-        triceps.setScientificName("Triceps brachii");
-        triceps.setShortName("Triceps");
-        triceps.setBodyPart(arms);
-
-        Muscle quads = new Muscle();
-        quads.setScientificName("Quadriceps femoris");
-        quads.setShortName("Quads");
-        quads.setBodyPart(legs);
-
-        Muscle hamstring1 = new Muscle();
-        hamstring1.setScientificName("Biceps femoris");
-        hamstring1.setShortName("Biceps femoris");
-        hamstring1.setBodyPart(legs);
-        System.out.println("... done!");
-
-
-        System.out.println("Add muscles to body parts ...");
-        arms.addMuscle(biceps)
-                .addMuscle(brachialis)
-                .addMuscle(brachioradialis)
-                .addMuscle(triceps);
-        legs.addMuscle(quads)
-                .addMuscle(hamstring1);
-        System.out.println("... done!");
-
-
-        System.out.println("Define exercises ...");
-        Exercise bicepsCurls = new Exercise();
-        bicepsCurls.setName("Biceps curls");
-        bicepsCurls.addPrimaryMuscleWorked(biceps);
-        bicepsCurls.addSecondaryMuscleWorked(brachialis)
-                .addSecondaryMuscleWorked(brachioradialis);
-        System.out.println("... done!");
+        defineArmMuscles();
+        defineLegMuscles();
 
 
         System.out.println("Save body parts ...");
         bodyPartService.save(chest);
         bodyPartService.save(back);
-        bodyPartService.save(arms);
-        bodyPartService.save(legs);
         bodyPartService.save(shoulders);
         bodyPartService.save(abdominals);
         System.out.println("... done!");
 
 
-        System.out.println("Save muscles ...");
-        muscleService.save(biceps);
-        muscleService.save(triceps);
-        muscleService.save(quads);
+
+
+//        System.out.println("Add muscles to body parts ...");
+//        arms.addMuscle(biceps)
+//                .addMuscle(brachialis)
+//                .addMuscle(brachioradialis)
+//                .addMuscle(triceps);
+//        legs.addMuscle(quads)
+//                .addMuscle(hamstring1);
+//        System.out.println("... done!");
+
+
+        System.out.println("Define exercises ...");
+        Exercise bicepsCurls = new Exercise();
+        bicepsCurls.setName("Biceps curls");
+//        bicepsCurls.addPrimaryMuscleWorked(biceps);
+//        bicepsCurls.addSecondaryMuscleWorked(brachialis)
+//                .addSecondaryMuscleWorked(brachioradialis);
         System.out.println("... done!");
 
+
+
+
+//        System.out.println("Save muscles ...");
+//        muscleService.save(quads);
+//        System.out.println("... done!");
+//
 
         System.out.println("Save exercises ...");
         exerciseService.save(bicepsCurls);
@@ -146,5 +117,88 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("... done!");
 
 
+    }
+
+    private void defineLegMuscles() {
+        BodyPart legs = BodyPart.builder()
+                .name("Legs")
+                .build();
+        Muscle quads = Muscle.builder()
+                .scientificName("Quadriceps femoris")
+                .shortName("Quads")
+                .bodyPart(legs)
+                .build();
+        Muscle gastrocnemius = Muscle.builder()
+                .scientificName("Gastrocnemius")
+                .shortName("Gastrocnemius")
+                .bodyPart(legs)
+                .build();
+        Muscle soleus = Muscle.builder()
+                .scientificName("Soleus")
+                .shortName("Soleus")
+                .bodyPart(legs)
+                .build();
+        Muscle tibialisAnterior = Muscle.builder()
+                .scientificName("Tibialis anterior")
+                .shortName("Tibialis anterior")
+                .bodyPart(legs)
+                .build();
+        Muscle hamstring1 = Muscle.builder()
+                .scientificName("Biceps femoris")
+                .shortName("Biceps femoris")
+                .bodyPart(legs)
+                .build();
+        Muscle hamstring2 = Muscle.builder()
+                .scientificName("Semitendinosus")
+                .shortName("Semitendinosus")
+                .bodyPart(legs)
+                .build();
+
+        Muscle hamstring3 = Muscle.builder()
+                .scientificName("Semimembranosus")
+                .shortName("Semimembranosus")
+                .bodyPart(legs)
+                .build();
+        muscleService.save(quads);
+        muscleService.save(gastrocnemius);
+        muscleService.save(soleus);
+        muscleService.save(tibialisAnterior);
+        muscleService.save(hamstring1);
+        muscleService.save(hamstring2);
+        muscleService.save(hamstring3);
+        
+        bodyPartService.save(legs);
+    }
+
+    private void defineArmMuscles() {
+        BodyPart arms = BodyPart.builder()
+                .name("Arms")
+                .build();
+        Muscle biceps = Muscle.builder()
+                .scientificName("Biceps brachii")
+                .shortName("Biceps")
+                .bodyPart(arms)
+                .build();
+        Muscle brachialis = Muscle.builder()
+                .scientificName("Brachialis")
+                .shortName("Brachialis")
+                .bodyPart(arms)
+                .build();
+        Muscle brachioradialis = Muscle.builder()
+                .scientificName("Brachioradialis")
+                .shortName("Brachioradialis")
+                .bodyPart(arms)
+                .build();
+        Muscle triceps = Muscle.builder()
+                .scientificName("Triceps brachii")
+                .shortName("Triceps")
+                .bodyPart(arms)
+                .build();
+        muscleService.save(biceps);
+        muscleService.save(brachialis);
+        muscleService.save(brachioradialis);
+        muscleService.save(triceps);
+
+        bodyPartService.save(arms);
     }
 }
